@@ -1,23 +1,26 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div>
+    <div class="van-ellipsis">
+      这是一段宽度限制 250px 的文字，后面的内容会省略
+    </div>
+    <van-button type="primary">按钮</van-button>
+    <van-icon
+      class-prefix="iconfont"
+      name="home"
+      size="40px"
+      info="12"
+      color="#108ee9"
+    />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import { Button, Icon } from 'vant'
+import Vue from 'vue'
+Vue.use(Button).use(Icon)
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
-  },
-  methods: {
-    doSomeThing() {
-      console.log('打印写东西出来')
-    }
-  }
+  name: 'HomePage'
 }
 </script>
+
+<style></style>
