@@ -11,16 +11,51 @@
       info="12"
       color="#108ee9"
     />
+    <div class="testvar"></div>
   </div>
 </template>
 
 <script>
 import { Button, Icon } from 'vant'
 import Vue from 'vue'
+import axios from 'axios'
 Vue.use(Button).use(Icon)
 export default {
-  name: 'HomePage'
+  name: 'HomePage',
+  mounted() {
+    this.fetchRecommendList()
+  },
+  methods: {
+    async fetchRecommendList() {
+      const ERR_OK = 0
+      let res = await axios({
+        method: 'get',
+        url: '/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg',
+        params: {
+          g_tk: 2090557760,
+          uin: 0,
+          format: 'json',
+          inCharset: 'utf-8',
+          outCharset: 'utf-8',
+          notice: 0,
+          platform: 'h5',
+          needNewCode: 1
+        }
+      })
+      console.log(res.data)
+      if (res.data.code === ERR_OK) {
+        console.log(res.data)
+      }
+    }
+  }
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+@import '~common/styles/variable';
+.testvar {
+  width: 200px;
+  height: 100px;
+  background-color: $theme-color;
+}
+</style>
