@@ -2,6 +2,7 @@
   <van-nav-bar
     :title="title"
     :left-arrow="showBackBtn"
+    fixed
     class="navbar"
     @click-left="back"
   />
