@@ -1,17 +1,8 @@
 <template>
-  <div>
-    <div class="van-ellipsis">
-      这是一段宽度限制 250px 的文字，后面的内容会省略
-    </div>
-    <van-button type="primary">按钮</van-button>
-    <van-icon
-      class-prefix="iconfont"
-      name="home"
-      size="40px"
-      info="12"
-      color="#108ee9"
-    />
-    <div class="testvar"></div>
+  <div class="home">
+    <router-link to="/guide">指南</router-link>
+    <router-link to="/notice">通知</router-link>
+    <router-view class="route-view"></router-view>
   </div>
 </template>
 
@@ -22,9 +13,7 @@ import axios from 'axios'
 Vue.use(Button).use(Icon)
 export default {
   name: 'HomePage',
-  mounted() {
-    this.fetchRecommendList()
-  },
+  mounted() {},
   methods: {
     async fetchRecommendList() {
       const ERR_OK = 0
@@ -53,9 +42,20 @@ export default {
 
 <style lang="scss" scoped>
 @import '~common/styles/variable';
+/* .home {
+  position: fixed;
+  top: 0;
+  left: 0;
+} */
 .testvar {
   width: 200px;
   height: 100px;
   background-color: $theme-color;
+}
+.route-view {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: slateblue;
 }
 </style>

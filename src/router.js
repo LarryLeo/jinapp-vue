@@ -11,16 +11,33 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: Home,
+      children: [
+        {
+          path: 'guide',
+          component: () => import('./views/Guide.vue')
+        },
+        {
+          path: 'notice',
+          component: () => import('./views/Notice.vue')
+        }
+      ]
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/politic',
+      name: 'politic',
+      component: () => import('./views/Politic.vue'),
+      children: [
+        {
+          path: 'contacts',
+          component: () => import('./views/Contacts.vue')
+        }
+      ]
+    },
+    {
+      path: '/my',
+      name: 'my',
+      component: () => import('./views/My.vue')
     }
   ]
 })
