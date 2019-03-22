@@ -8,9 +8,7 @@
 <script>
 export default {
   name: 'Politic',
-  mounted() {
-    console.log('江津政务')
-  }
+  mounted() {}
 }
 </script>
 <style lang="scss" scoped></style>

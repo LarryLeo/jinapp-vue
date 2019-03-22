@@ -4,9 +4,7 @@
 <script>
 export default {
   name: 'My',
-  mounted() {
-    console.log('我的')
-  }
+  mounted() {}
 }
 </script>
 <style lang="scss" scoped></style>

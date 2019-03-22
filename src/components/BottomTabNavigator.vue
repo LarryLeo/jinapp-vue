@@ -1,5 +1,5 @@
 <template>
-  <van-tabbar v-model="active">
+  <van-tabbar v-model="active" v-show="showTabbar">
     <van-tabbar-item to="/">
       <span>首页</span>
       <i class="iconfont iconfont-home" slot="icon"></i>
@@ -22,7 +22,23 @@ export default {
   name: 'BottomTabNavigator',
   data() {
     return {
-      active: 0
+      active: 0,
+      showTabbar: true
+    }
+  },
+  watch: {
+    $route(updatedRoute) {
+      let { path } = updatedRoute
+      switch (path) {
+        case '/':
+          return (this.showTabbar = true)
+        case '/politic':
+          return (this.showTabbar = true)
+        case '/my':
+          return (this.showTabbar = true)
+        default:
+          return (this.showTabbar = false)
+      }
     }
   }
 }
