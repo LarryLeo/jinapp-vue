@@ -1,17 +1,20 @@
 <template>
   <div class="home">
-    <router-link to="/guide">指南</router-link>
-    <router-link to="/notice">通知</router-link>
-    <van-button type="primary" @click="navigate">我要跳转</van-button>
+    <van-swipe>
+      <van-swipe-item>1</van-swipe-item>
+      <van-swipe-item>2</van-swipe-item>
+      <van-swipe-item>3</van-swipe-item>
+      <van-swipe-item>4</van-swipe-item>
+    </van-swipe>
     <router-view class="route-view"></router-view>
   </div>
 </template>
 
 <script>
-import { Button, Icon } from 'vant'
+import { Swipe, SwipeItem } from 'vant'
 import Vue from 'vue'
+Vue.use(Swipe).use(SwipeItem)
 // import axios from 'axios'
-Vue.use(Button).use(Icon)
 export default {
   name: 'HomePage',
   mounted() {},
