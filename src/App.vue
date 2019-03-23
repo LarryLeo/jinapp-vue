@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <TopNavBar />
-    <router-view />
+    <keep-alive>
+      <router-view />
+    </keep-alive>
     <BottomTabNavigator />
   </div>
 </template>

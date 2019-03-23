@@ -49,6 +49,7 @@
 <script>
 import { Swipe, SwipeItem } from 'vant'
 import Vue from 'vue'
+import { requestGet } from '../utils/index'
 
 import sliderImage from '../assets/images/slider.jpg'
 
@@ -61,8 +62,17 @@ export default {
       slides: [sliderImage, sliderImage, sliderImage]
     }
   },
+  created() {
+    this.fetchConsultNum()
+    this.fetchWeather
+  },
   mounted() {},
   methods: {
+    async fetchConsultNum() {
+      let res = await requestGet('/app/v1/index/getIndexView')
+      console.log(res)
+    },
+    fetchWeather() {},
     navigate() {
       this.$router.push({
         path: 'guide/我的传输',

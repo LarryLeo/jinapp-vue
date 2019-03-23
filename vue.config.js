@@ -10,8 +10,8 @@ module.exports = {
   },
   devServer: {
     proxy: {
-      '/musichall': {
-        target: 'https://c.y.qq.com/',
+      '/app': {
+        target: 'http://jz.test.chimukeji.com',
         changeOrigin: true
       }
     }
