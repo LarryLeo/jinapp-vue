@@ -3,6 +3,7 @@
     :title="title"
     :left-arrow="showBackBtn"
     fixed
+    :z-index="999"
     class="navbar"
     @click-left="back"
   />

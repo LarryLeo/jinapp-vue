@@ -10,7 +10,7 @@
       </van-swipe-item>
     </van-swipe>
     <section class="menu-entry">
-      <div class="item">
+      <div class="item" @click="navigate('/notice')">
         <img src="../assets/icons/policy.png" alt="" class="icon" />
         <span class="title">政策宣传</span>
       </div>
@@ -33,16 +33,18 @@
     </section>
     <div class="consult-info">
       <div class="top">
-        <span class="num">152人</span>
+        <span class="num">{{ consultNum }}人</span>
         <span class="jump-to-consult">立即咨询</span>
       </div>
       <span class="text">已在警企e通咨询</span>
     </div>
     <div class="weather">
-      <p class="num">11℃ ~ 15℃</p>
-      <p class="text">今日天气：小雨</p>
+      <p class="num">{{ weather.temp1 }} ~ {{ weather.temp2 }}</p>
+      <p class="text">今日天气：{{ weather.weather }}</p>
     </div>
-    <router-view class="route-view"> </router-view>
+    <transition name="slide">
+      <router-view class="route-view"> </router-view>
+    </transition>
   </div>
 </template>
 
@@ -50,35 +52,45 @@
 import { Swipe, SwipeItem } from 'vant'
 import Vue from 'vue'
 import { requestGet } from '../utils/index'
+import axios from 'axios'
 
 import sliderImage from '../assets/images/slider.jpg'
 
 Vue.use(Swipe).use(SwipeItem)
-// import axios from 'axios'
 export default {
   name: 'HomePage',
   data() {
     return {
-      slides: [sliderImage, sliderImage, sliderImage]
+      slides: [sliderImage, sliderImage, sliderImage],
+      consultNum: 0,
+      weather: {}
     }
   },
   created() {
-    this.fetchConsultNum()
-    this.fetchWeather
+    // 并发请求
+    this.fetchHomePageData()
   },
   mounted() {},
+  destroyed() {
+    console.log('我销毁了')
+  },
   methods: {
-    async fetchConsultNum() {
-      let res = await requestGet('/app/v1/index/getIndexView')
-      console.log(res)
+    fetchHomePageData() {
+      axios
+        .all([
+          requestGet('/app/v1/index/getIndexView'),
+          requestGet('/app/v1/index/weather')
+        ])
+        .then(
+          axios.spread((resConsultNum, resWeather) => {
+            this.consultNum = resConsultNum.data.total_consult_member
+            this.weather = resWeather.data.weather
+          })
+        )
     },
-    fetchWeather() {},
-    navigate() {
+    navigate(path) {
       this.$router.push({
-        path: 'guide/我的传输',
-        query: {
-          post_id: 12
-        }
+        path
       })
     }
   }
@@ -93,10 +105,9 @@ export default {
   overflow: auto;
 }
 .route-view {
-  position: fixed;
+  box-sizing: border-box;
+  background-color: #f5f6fa;
   height: 100%;
-  width: 100%;
-  background-color: slateblue;
 }
 .slide-wrapper {
   border-radius: 10px;
@@ -179,5 +190,14 @@ export default {
   .text {
     margin-top: 20px;
   }
+}
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s;
+}
+
+.slide-enter,
+.slide-leave-to {
+  transform: translate3d(100%, 0, 0);
 }
 </style>

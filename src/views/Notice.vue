@@ -9,7 +9,8 @@ export default {}
 <style lang="scss" scoped>
 .notice {
   position: fixed;
-  z-index: 99;
+  z-index: 9;
+  padding-top: 46px;
   top: 0;
   left: 0;
   width: 100%;
