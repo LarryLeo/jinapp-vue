@@ -7,7 +7,7 @@
         finished-text="没有更多啦"
       >
         <van-cell v-for="(item, index) in noticeList" :key="index">
-          <div class="item">
+          <div class="item" @click="goToDetail">
             <img src="../assets/images/notice-icon.jpg" alt="" class="icon" />
             <p class="title">{{ item.title }}</p>
           </div>
@@ -41,13 +41,17 @@ export default {
     this.fetchNotice()
   },
   methods: {
+    goToDetail() {
+      this.$router.push({
+        path: '/notice/detail'
+      })
+    },
     async fetchNotice(refresh) {
       if (refresh) {
         this.noMore = false
         this.noticeList = []
       }
-      if (this.noMore || this.loading)
-        return console.log('没有更多数据了, 或加载中')
+      if (this.noMore || this.loading) return
       this.loading = true
       let res = await requestGet('/app/v1/index/articleList', {
         type_id: 3,

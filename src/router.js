@@ -12,6 +12,9 @@ export default new Router({
       path: '/',
       name: '警企e通',
       component: Home,
+      meta: {
+        pageIndex: 0
+      },
       children: [
         {
           path: 'guide/:title',
@@ -21,7 +24,18 @@ export default new Router({
         {
           path: 'notice',
           component: () => import('./views/Notice.vue'),
-          name: '政策宣传'
+          name: '政策宣传',
+          meta: {
+            pageIndex: 1
+          }
+        },
+        {
+          path: 'notice/detail',
+          component: () => import('./views/NoticeDetail.vue'),
+          name: '详情',
+          meta: {
+            pageIndex: 2
+          }
         }
       ]
     },

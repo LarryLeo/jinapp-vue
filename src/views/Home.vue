@@ -6,7 +6,7 @@
         :key="index"
         class="slide-wrapper"
       >
-        <img :src="slide" alt="" class="slide" />
+        <img :src="slide" alt="" class="slide-item" />
       </van-swipe-item>
     </van-swipe>
     <section class="menu-entry">
@@ -42,7 +42,7 @@
       <p class="num">{{ weather.temp1 }} ~ {{ weather.temp2 }}</p>
       <p class="text">今日天气：{{ weather.weather }}</p>
     </div>
-    <transition name="slide">
+    <transition :name="transitionName">
       <router-view class="route-view"> </router-view>
     </transition>
   </div>
@@ -63,7 +63,23 @@ export default {
     return {
       slides: [sliderImage, sliderImage, sliderImage],
       consultNum: 0,
-      weather: {}
+      weather: {},
+      transitionName: 'slide-right'
+    }
+  },
+  watch: {
+    $route(routeCurrent, routePrev) {
+      let { pageIndex: currentPageIndex } = routeCurrent.meta
+      let { pageIndex: prevPageIndex } = routePrev.meta
+      // 触发路由跳转的那一刻
+      if (prevPageIndex === 0) {
+        return (this.transitionName = 'slide-home')
+      }
+      if (currentPageIndex > prevPageIndex) {
+        this.transitionName = 'slide-left'
+      } else {
+        this.transitionName = 'slide-right'
+      }
     }
   },
   created() {
@@ -112,7 +128,7 @@ export default {
 .slide-wrapper {
   border-radius: 10px;
   overflow: hidden;
-  .slide {
+  .slide-item {
     width: 100%;
     height: 100%;
   }
@@ -191,13 +207,41 @@ export default {
     margin-top: 20px;
   }
 }
-.slide-enter-active,
-.slide-leave-active {
+.slide-home-enter-active,
+.slide-home-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active,
+.slide-left-enter-active,
+.slide-left-leave-active {
   transition: all 0.3s;
 }
 
-.slide-enter,
-.slide-leave-to {
+.slide-left-enter {
+  transform: translate3d(100%, 0, 0);
+}
+.slide-left-enter-to {
+  transform: translate3d(0, 0, 0);
+}
+.slide-left-leave {
+  transform: translate3d(0, 0, 0);
+}
+.slide-left-leave-to {
+  transform: translate3d(-100%, 0, 0);
+}
+.slide-right-enter {
+  transform: translate3d(-100%, 0, 0);
+}
+.slide-right-enter-to {
+  transform: translate3d(0, 0, 0);
+}
+.slide-right-leave {
+  transform: translate3d(0, 0, 0);
+}
+.slide-right-leave-to {
+  transform: translate3d(100%, 0, 0);
+}
+.slide-home-enter,
+.slide-home-leave-to {
   transform: translate3d(100%, 0, 0);
 }
 </style>
