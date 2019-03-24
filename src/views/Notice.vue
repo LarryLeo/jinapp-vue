@@ -7,7 +7,7 @@
         finished-text="没有更多啦"
       >
         <van-cell v-for="(item, index) in noticeList" :key="index">
-          <div class="item" @click="goToDetail">
+          <div class="item" @click="goToDetail(index)">
             <img src="../assets/images/notice-icon.jpg" alt="" class="icon" />
             <p class="title">{{ item.title }}</p>
           </div>
@@ -20,7 +20,9 @@
 <script>
 import Vue from 'vue'
 import { List, Cell, PullRefresh } from 'vant'
+import { mapMutations, mapState } from 'vuex'
 import { requestGet } from '../utils/index'
+import * as types from '../mutations/mutationTypes'
 
 Vue.use(List)
   .use(Cell)
@@ -37,13 +39,27 @@ export default {
       noMore: false
     }
   },
-  created() {
-    this.fetchNotice()
+  computed: {
+    ...mapState(['notice'])
   },
+  created() {
+    if (this.notice.data.length) {
+      this.noticeList = this.notice.data
+      this.noMore = this.notice.noMore
+    } else {
+      this.fetchNotice()
+    }
+  },
+  beforeDestroy() {},
   methods: {
-    goToDetail() {
+    goToDetail(selectIndex) {
       this.$router.push({
         path: '/notice/detail'
+      })
+      this.cacheNoticeList({
+        data: this.noticeList,
+        selectIndex,
+        noMore: this.noMore
       })
     },
     async fetchNotice(refresh) {
@@ -64,7 +80,10 @@ export default {
       this.noMore = list.length < this.ps
       this.loading = false
       this.refreshing = false
-    }
+    },
+    ...mapMutations({
+      cacheNoticeList: types.CACHE_NOTICE_DATA
+    })
   }
 }
 </script>

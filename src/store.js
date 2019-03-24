@@ -8,9 +8,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    homePageData: {
-      consultNum: 0,
-      weather: {}
+    notice: {
+      selectIndex: 0,
+      noMore: false,
+      data: []
     }
   },
   mutations,

@@ -1,2 +1,2 @@
-export const consultNumInfo = state => state.homePageData.consultNum
-export const weather = state => state.homePageData.weather
+export const currentNoticeDetail = state =>
+  state.notice.data[state.notice.selectIndex]

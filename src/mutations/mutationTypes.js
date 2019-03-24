@@ -1,1 +1,2 @@
-export const CACHE_HOME_DATA = 'CACHE_HOME_DATA'
+// export const CACHE_HOME_DATA = 'CACHE_HOME_DATA'
+export const CACHE_NOTICE_DATA = 'CACHE_NOTICE_DATA'
