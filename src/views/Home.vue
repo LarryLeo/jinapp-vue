@@ -18,11 +18,11 @@
         <img src="../assets/icons/guide.png" alt="" class="icon" />
         <span class="title">办事指南</span>
       </div>
-      <div class="item">
+      <div class="item" @click="navigate('/make/suggest')">
         <img src="../assets/icons/suggestion.png" alt="" class="icon" />
         <span class="title">意见建议</span>
       </div>
-      <div class="item">
+      <div class="item" @click="navigate('/make/consult')">
         <img src="../assets/icons/consult.png" alt="" class="icon" />
         <span class="title">政务咨询</span>
       </div>
@@ -85,10 +85,6 @@ export default {
   created() {
     // 并发请求
     this.fetchHomePageData()
-  },
-  mounted() {},
-  destroyed() {
-    console.log('我销毁了')
   },
   methods: {
     fetchHomePageData() {

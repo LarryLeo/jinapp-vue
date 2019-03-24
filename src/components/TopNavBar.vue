@@ -25,7 +25,13 @@ export default {
   watch: {
     $route(updatedRoute) {
       let { name, path } = updatedRoute
-      this.title = name || '默认'
+      if (path === '/make/suggest') {
+        this.title = '意见建议'
+      } else if (path === '/make/consult') {
+        this.title = '政务咨询'
+      } else {
+        this.title = name || '默认'
+      }
       switch (path) {
         case '/':
           return (this.showBackBtn = false)

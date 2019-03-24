@@ -1,0 +1,9 @@
+@mixin childRoute {
+  position: fixed;
+  z-index: 9;
+  padding-top: 46px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: auto;
+}

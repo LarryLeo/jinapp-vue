@@ -36,6 +36,14 @@ export default new Router({
           meta: {
             pageIndex: 2
           }
+        },
+        {
+          path: 'make/:type',
+          component: () => import('./views/Make.vue'),
+          name: '咨询建议',
+          meta: {
+            pageIndex: 1
+          }
         }
       ]
     },
