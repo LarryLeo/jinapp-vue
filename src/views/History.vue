@@ -52,7 +52,52 @@
             </van-list>
           </van-pull-refresh>
         </van-tab>
-        <van-tab title="我的咨询">我的咨询</van-tab>
+        <van-tab title="我的咨询">
+          <van-pull-refresh
+            v-model="pullLoading"
+            @refresh="pullRefresh('consultations')"
+          >
+            <van-list
+              class="list-wrapper"
+              @load="fetchHistoryData({ type: 'consultations' })"
+              :finished="consultationsHistory.noMore"
+              finished-text="没有更多啦"
+            >
+              <div
+                class="list-item"
+                v-for="(item, index) in consultationsHistory.data"
+                :key="index"
+              >
+                <div class="header flex">
+                  <div class="left flex">
+                    <span class="key">咨询对象</span>
+                    <span class="unit">{{ item.unit.unit_name }}</span>
+                  </div>
+                  <span class="status" :style="statusBg(item.status)">
+                    {{ statusDesc(item.status) }}
+                  </span>
+                </div>
+                <div class="row flex">
+                  <span class="key">主题</span>
+                  <span class="value">{{ item.title }}</span>
+                </div>
+                <div class="row flex">
+                  <span class="key">描述</span>
+                  <span class="value">{{ item.content }}</span>
+                </div>
+                <div class="flex">
+                  <span class="key">评分</span>
+                  <van-rate
+                    v-model="item.star"
+                    :count="5"
+                    readonly
+                    :size="18"
+                  />
+                </div>
+              </div>
+            </van-list>
+          </van-pull-refresh>
+        </van-tab>
       </van-tabs>
     </div>
   </div>
