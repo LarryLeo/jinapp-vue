@@ -12,6 +12,22 @@ export default new Vuex.Store({
       selectIndex: 0,
       noMore: false,
       data: []
+    },
+    history: {
+      suggestions: {
+        loading: false,
+        noMore: false,
+        pn: 1,
+        ps: 10,
+        data: []
+      },
+      consultations: {
+        loading: false,
+        noMore: false,
+        pn: 1,
+        ps: 10,
+        data: []
+      }
     }
   },
   mutations,

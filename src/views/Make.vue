@@ -1,8 +1,12 @@
 <template>
   <div class="container">
     <div class="to-history">
-      <span v-if="currentPageName === 'suggest'">意见历史</span>
-      <span v-if="currentPageName === 'consult'">咨询历史</span>
+      <span v-if="currentPageName === 'suggest'" @click="goToHistory"
+        >意见历史</span
+      >
+      <span v-if="currentPageName === 'consult'" @click="goToHistory"
+        >咨询历史</span
+      >
     </div>
     <div class="input-area-wrapper">
       <div class="item" style="margin-bottom: 10px;">
@@ -192,6 +196,11 @@ export default {
       } else {
         Toast.fail('提交失败')
       }
+    },
+    goToHistory() {
+      this.$router.push({
+        path: `${this.currentPageName}/history`
+      })
     }
   }
 }

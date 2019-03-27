@@ -29,6 +29,16 @@ export default {
         this.title = '意见建议'
       } else if (path === '/make/consult') {
         this.title = '政务咨询'
+      } else if (
+        path === '/make/consult/history' ||
+        path === '/make/suggest/history'
+      ) {
+        this.title = '我的记录'
+      } else if (
+        path === '/my/suggestion/history' ||
+        path === '/my/consultation/history'
+      ) {
+        this.title = '我的记录'
       } else {
         this.title = name || '默认'
       }

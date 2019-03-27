@@ -44,6 +44,14 @@ export default new Router({
           meta: {
             pageIndex: 1
           }
+        },
+        {
+          path: 'make/:type/history',
+          component: () => import('./views/History.vue'),
+          name: '我的记录',
+          meta: {
+            pageIndex: 2
+          }
         }
       ]
     },
@@ -62,7 +70,17 @@ export default new Router({
     {
       path: '/my',
       name: '我的',
-      component: () => import('./views/My.vue')
+      component: () => import('./views/My.vue'),
+      children: [
+        {
+          path: 'history',
+          component: () => import('./views/History.vue'),
+          name: '我的记录B',
+          meta: {
+            pageIndex: 1
+          }
+        }
+      ]
     }
   ]
 })
