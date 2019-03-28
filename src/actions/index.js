@@ -1,10 +1,6 @@
 import * as types from '../mutations/mutationTypes'
 import { requestGet } from '../utils/index'
 
-export const cacheHomePageData = ({ commit }, data) => {
-  commit(types.CACHE_HOME_DATA, data)
-}
-
 export const fetchHistoryData = ({ commit, state }, { type }) => {
   let targetState = state.history[type]
   if (targetState.noMore) return console.log('没有更多数据')

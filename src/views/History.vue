@@ -5,6 +5,8 @@
         color="#0093ff"
         v-model="activeTabIndex"
         @change="loadHistoryJustOnetime"
+        sticky
+        :offset-top="46"
       >
         <van-tab title="我的意见">
           <van-pull-refresh
@@ -118,7 +120,6 @@ export default {
   data() {
     return {
       activeTabIndex: 0,
-      starOn: 3,
       historyType: 'suggestions',
       switchAndLoad: true,
       pullLoading: false

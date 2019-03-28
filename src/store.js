@@ -19,6 +19,7 @@ export default new Vuex.Store({
         noMore: false,
         pn: 1,
         ps: 10,
+        selectedIndex: 0,
         data: []
       },
       consultations: {
@@ -26,6 +27,7 @@ export default new Vuex.Store({
         noMore: false,
         pn: 1,
         ps: 10,
+        selectedIndex: 0,
         data: []
       }
     }
