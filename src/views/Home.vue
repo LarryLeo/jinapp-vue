@@ -26,7 +26,7 @@
         <img src="../assets/icons/consult.png" alt="" class="icon" />
         <span class="title">政务咨询</span>
       </div>
-      <div class="item">
+      <div class="item" @click="navigate('/company-comunication')">
         <img src="../assets/icons/chat.png" alt="" class="icon" />
         <span class="title">警企互联</span>
       </div>

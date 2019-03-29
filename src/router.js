@@ -60,6 +60,24 @@ export default new Router({
           meta: {
             pageIndex: 3
           }
+        },
+        {
+          path: 'company-comunication',
+          component: () => import('./views/CompanyCommunication.vue'),
+          name: '警企互联',
+          meta: {
+            pageIndex: 1
+          },
+          children: [
+            {
+              path: 'company-list',
+              component: () => import('./views/CompanyList.vue'),
+              name: '企业列表',
+              meta: {
+                pageIndex: 2
+              }
+            }
+          ]
         }
       ]
     },
