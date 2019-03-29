@@ -23,6 +23,7 @@
                 class="list-item"
                 v-for="(item, index) in suggestionsHistory.data"
                 :key="index"
+                @click="goToReplyDetail(index, 'suggestions')"
               >
                 <div class="header flex">
                   <div class="left flex">
@@ -69,6 +70,7 @@
                 class="list-item"
                 v-for="(item, index) in consultationsHistory.data"
                 :key="index"
+                @click="goToReplyDetail(index, 'consultations')"
               >
                 <div class="header flex">
                   <div class="left flex">
@@ -108,7 +110,7 @@
 <script>
 import { Tabs, Tab, List, Rate, PullRefresh } from 'vant'
 import Vue from 'vue'
-import { mapActions, mapGetters } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 
 Vue.use(Tabs)
   .use(Tab)
@@ -172,7 +174,21 @@ export default {
       await this.refreshHistoryData({ type })
       this.pullLoading = false
     },
-    ...mapActions(['fetchHistoryData', 'refreshHistoryData'])
+    goToReplyDetail(selectedIndex, type) {
+      let path =
+        type === 'suggestions'
+          ? '/make/suggest/history/detail'
+          : '/make/consult/history/detail'
+      this.$router.push({
+        path
+      })
+      this.selectHistoryItem({
+        type,
+        selectedIndex
+      })
+    },
+    ...mapActions(['fetchHistoryData', 'refreshHistoryData']),
+    ...mapMutations({ selectHistoryItem: 'SELECT_HISTORY_ITEM' })
   }
 }
 </script>

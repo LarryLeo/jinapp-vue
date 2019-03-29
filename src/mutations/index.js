@@ -22,6 +22,10 @@ const mutations = {
     targetState.data = []
     targetState.noMore = false
     targetState.pn = 1
+  },
+  [types.SELECT_HISTORY_ITEM](state, { type, selectedIndex }) {
+    let targetState = state.history[type]
+    targetState.selectedIndex = selectedIndex
   }
 }
 

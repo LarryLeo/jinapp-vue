@@ -52,6 +52,14 @@ export default new Router({
           meta: {
             pageIndex: 2
           }
+        },
+        {
+          path: 'make/:type/history/detail',
+          component: () => import('./views/HistoryReplyDetail.vue'),
+          name: '回复详情',
+          meta: {
+            pageIndex: 3
+          }
         }
       ]
     },
