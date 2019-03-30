@@ -30,6 +30,14 @@ export default new Vuex.Store({
         selectedIndex: 0,
         data: []
       }
+    },
+    selectedCompany: {
+      company: '请选择联系企业',
+      id: -1
+    },
+    selectedPerson: {
+      realname: '请选择联系人',
+      id: -1
     }
   },
   mutations,

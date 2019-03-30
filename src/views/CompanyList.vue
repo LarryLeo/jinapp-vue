@@ -1,13 +1,22 @@
 <template>
   <div class="container">
     <van-search placeholder="请输入搜索关键词" v-model="keyword" />
-    <SectionListView :data="companyList" v-show="!keyword" />
-    <SectionListView :data="searchResult" v-show="keyword" />
+    <SectionListView
+      :data="companyList"
+      v-show="!keyword"
+      @select="selectItem"
+    />
+    <SectionListView
+      :data="searchResult"
+      v-show="keyword"
+      :searchActive="true"
+    />
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
+import { mapMutations } from 'vuex'
 import { Search } from 'vant'
 import { requestGet } from '../utils/index'
 import SectionListView from '../components/SectionListView.vue'
@@ -26,8 +35,7 @@ export default {
     }
   },
   watch: {
-    keyword(newVal) {
-      console.log(newVal)
+    keyword() {
       this.onSearch()
     }
   },
@@ -35,6 +43,10 @@ export default {
     this.fetchCompanyList()
   },
   methods: {
+    selectItem(item) {
+      this.selectCompany(item)
+      this.$router.back()
+    },
     onSearch() {
       let companies = JSON.parse(JSON.stringify(this.companyList))
       for (let i = 0; i < companies.length; i++) {
@@ -57,7 +69,10 @@ export default {
         ...userCredential
       })
       this.companyList = res.list
-    }
+    },
+    ...mapMutations({
+      selectCompany: 'SELECT_CONTACT_COMPANY'
+    })
   }
 }
 </script>

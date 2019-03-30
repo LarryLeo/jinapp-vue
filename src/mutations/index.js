@@ -26,6 +26,12 @@ const mutations = {
   [types.SELECT_HISTORY_ITEM](state, { type, selectedIndex }) {
     let targetState = state.history[type]
     targetState.selectedIndex = selectedIndex
+  },
+  [types.SELECT_CONTACT_COMPANY](state, company) {
+    state.selectedCompany = company
+  },
+  [types.SELECT_CONTACT_PERSON](state, person) {
+    state.selectedPerson = person
   }
 }
 

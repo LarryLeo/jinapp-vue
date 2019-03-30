@@ -20,7 +20,7 @@
             v-for="(item, index) in group.items"
             :key="index"
             class="list-group-item"
-            @click="selectSinger(item)"
+            @click="selectItem(item)"
           >
             <span class="name">{{ item.company }}</span>
           </li>
@@ -28,7 +28,7 @@
       </li>
     </ul>
     <!-- 字母索引表 -->
-    <div class="list-shortcut">
+    <div class="list-shortcut" v-show="!searchActive">
       <ul
         @touchstart.stop.prevent="onShortcutTouchStart"
         @touchmove.stop.prevent="onShortcutTouchMove"
@@ -60,6 +60,10 @@ export default {
     data: {
       type: Array,
       default: null
+    },
+    searchActive: {
+      type: Boolean,
+      default: false
     }
   },
   components: {
@@ -77,8 +81,8 @@ export default {
     }
   },
   methods: {
-    selectSinger(singer) {
-      this.$emit('select', singer)
+    selectItem(item) {
+      this.$emit('select', item)
     },
     onShortcutTouchStart(e) {
       let targetIndex = e.target.getAttribute('data-index')

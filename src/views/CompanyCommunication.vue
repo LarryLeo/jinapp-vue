@@ -6,12 +6,12 @@
         <span
           class="value"
           @click="navigateTo('/company-comunication/company-list')"
-          >请选择联系企业</span
+          >{{ selectedCompany.company }}</span
         >
       </div>
       <div class="item" style="margin-bottom: 10px;">
         <span class="key">联系人</span>
-        <span class="value">请选择联系人</span>
+        <span class="value">{{ selectedPerson.realname }}</span>
       </div>
       <textarea
         name=""
@@ -33,6 +33,7 @@
 
 <script>
 import Vue from 'vue'
+import { mapState } from 'vuex'
 import { Icon, Uploader } from 'vant'
 
 Vue.use(Icon).use(Uploader)
@@ -42,6 +43,9 @@ export default {
     return {
       content: ''
     }
+  },
+  computed: {
+    ...mapState(['selectedPerson', 'selectedCompany'])
   },
   methods: {
     navigateTo(path) {
@@ -84,7 +88,6 @@ export default {
     box-sizing: border-box;
     padding: 10px;
     width: 100%;
-    border-top: 1px solid #d1d1d1;
   }
 }
 /* 路由切换动画 */
