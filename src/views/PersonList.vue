@@ -85,6 +85,7 @@ export default {
 @import '~common/styles/mixin';
 .container {
   @include childRoute;
+  z-index: 999;
   background-color: #f5f5f9;
   height: 100%;
   width: 100%;

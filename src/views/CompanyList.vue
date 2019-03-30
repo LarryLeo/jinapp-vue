@@ -84,6 +84,7 @@ export default {
 .container {
   @include childRoute;
   background-color: #f5f5f9;
+  z-index: 999;
   height: 100%;
   width: 100%;
 }
