@@ -22,7 +22,7 @@
             class="list-group-item"
             @click="selectItem(item)"
           >
-            <span class="name">{{ item.company }}</span>
+            <span class="name">{{ item.company || item.realname }}</span>
           </li>
         </ul>
       </li>

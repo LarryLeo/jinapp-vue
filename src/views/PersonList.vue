@@ -2,7 +2,7 @@
   <div class="container">
     <van-search placeholder="请输入搜索关键词" v-model="keyword" />
     <SectionListView
-      :data="companyList"
+      :data="PersonList"
       v-show="!keyword"
       @select="selectItem"
     />
@@ -16,20 +16,20 @@
 
 <script>
 import Vue from 'vue'
-import { mapMutations } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
 import { Search } from 'vant'
 import { requestGet } from '../utils/index'
 import SectionListView from '../components/SectionListView.vue'
 
 Vue.use(Search)
 export default {
-  name: 'CompanyList',
+  name: 'PersonList',
   components: {
     SectionListView
   },
   data() {
     return {
-      companyList: [],
+      PersonList: [],
       searchResult: [],
       keyword: ''
     }
@@ -39,17 +39,19 @@ export default {
       this.onSearch()
     }
   },
+  computed: {
+    ...mapState(['selectedCompany'])
+  },
   created() {
-    this.fetchCompanyList()
+    this.fetchPersonList()
   },
   methods: {
     selectItem(item) {
-      this.selectCompany(item)
-      this.resetSelectedPerson()
+      this.selectPerson(item)
       this.$router.back()
     },
     onSearch() {
-      let companies = JSON.parse(JSON.stringify(this.companyList))
+      let companies = JSON.parse(JSON.stringify(this.PersonList))
       for (let i = 0; i < companies.length; i++) {
         for (let j = 0; j < companies[i].items.length; j++) {
           if (companies[i].items[j].company.indexOf(this.keyword) > -1) continue // 保留匹配项
@@ -64,16 +66,16 @@ export default {
       }
       this.searchResult = companies
     },
-    async fetchCompanyList() {
+    async fetchPersonList() {
       let userCredential = JSON.parse(localStorage.getItem('userCredential'))
-      let res = await requestGet('/app/v1/company/allList', {
-        ...userCredential
+      let res = await requestGet('/app/v1/company/allMemberList', {
+        ...userCredential,
+        company_id: this.selectedCompany.id
       })
-      this.companyList = res.list
+      this.PersonList = res.list
     },
     ...mapMutations({
-      selectCompany: 'SELECT_CONTACT_COMPANY',
-      resetSelectedPerson: 'RESET_SELECT_CONTACT_PERSON'
+      selectPerson: 'SELECT_CONTACT_PERSON'
     })
   }
 }

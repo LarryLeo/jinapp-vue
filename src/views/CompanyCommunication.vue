@@ -11,7 +11,11 @@
       </div>
       <div class="item" style="margin-bottom: 10px;">
         <span class="key">联系人</span>
-        <span class="value">{{ selectedPerson.realname }}</span>
+        <span
+          class="value"
+          @click="navigateTo('/company-comunication/person-list')"
+          >{{ selectedPerson.realname }}</span
+        >
       </div>
       <textarea
         name=""
@@ -34,7 +38,7 @@
 <script>
 import Vue from 'vue'
 import { mapState } from 'vuex'
-import { Icon, Uploader } from 'vant'
+import { Icon, Uploader, Toast } from 'vant'
 
 Vue.use(Icon).use(Uploader)
 export default {
@@ -49,6 +53,12 @@ export default {
   },
   methods: {
     navigateTo(path) {
+      if (
+        path === '/company-comunication/person-list' &&
+        this.selectedCompany.id === -1
+      ) {
+        return Toast('未选择联系企业')
+      }
       this.$router.push({
         path
       })

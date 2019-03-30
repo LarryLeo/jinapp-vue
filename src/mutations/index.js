@@ -32,6 +32,12 @@ const mutations = {
   },
   [types.SELECT_CONTACT_PERSON](state, person) {
     state.selectedPerson = person
+  },
+  [types.RESET_SELECT_CONTACT_PERSON](state) {
+    state.selectedPerson = {
+      realname: '请选择联系人',
+      id: -1
+    }
   }
 }
 

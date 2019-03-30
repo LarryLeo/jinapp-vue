@@ -76,6 +76,14 @@ export default new Router({
               meta: {
                 pageIndex: 2
               }
+            },
+            {
+              path: 'person-list',
+              component: () => import('./views/PersonList.vue'),
+              name: '联系人列表',
+              meta: {
+                pageIndex: 2
+              }
             }
           ]
         }
