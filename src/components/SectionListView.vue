@@ -188,7 +188,7 @@ export default {
 .listview {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 100px);
   overflow: hidden;
   .list-group {
     padding-bottom: 0px;
