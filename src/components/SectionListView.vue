@@ -106,6 +106,7 @@ export default {
     },
     // 计算每个listGroup的高度，将其存入数组，判断滚动距离落在哪个区间就能确定listGroup的index
     calculateListHeight() {
+      if (!this.data.length) return
       this.listHeight = []
       const list = this.$refs.listGroup
       let height = 0
