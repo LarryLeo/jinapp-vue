@@ -68,6 +68,9 @@
             class="chatListItem"
             v-for="(item, index) in chatList"
             :key="index"
+            @click="
+              navigateTo(`/company-comunication/chat-detail?chat_id=${item.id}`)
+            "
           >
             <img :src="item.member.head_img" alt="" class="memberAvatar" />
             <div class="messageContent">

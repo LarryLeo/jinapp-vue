@@ -84,6 +84,14 @@ export default new Router({
               meta: {
                 pageIndex: 2
               }
+            },
+            {
+              path: 'chat-detail',
+              component: () => import('./views/ChatDetail.vue'),
+              name: '聊天详情',
+              meta: {
+                pageIndex: 2
+              }
             }
           ]
         }
